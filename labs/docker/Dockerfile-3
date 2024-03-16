@@ -1,0 +1,13 @@
+# Actualiza e instala NGINX
+FROM ubuntu
+# Especifica el shell que deseas utilizar
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update
+RUN apt-get install -y nginx
+
+# Copia el archivo index.html al directorio HTML de NGINX
+COPY index.html /var/www/html/
+
+# Ejecuta NGINX con el nuevo shell
+CMD ["nginx", "-g", "daemon off;"]

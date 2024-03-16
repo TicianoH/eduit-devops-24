@@ -1,0 +1,4 @@
+Test app by running:
+kubectl port-forward deployment/python-app 5000
+And then:
+curl http://localhost:5000

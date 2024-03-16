@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: python-app
+spec:
+ imagePullSecrets:
+   - name: my-registry-key
+ containers:
+ - name: python-app
+   image: asruiz1235/python-app:5
+   ports:
+   - containerPort: 5000

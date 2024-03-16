@@ -1,0 +1,21 @@
+---
+- name: Ejemplo de uso de variables de entorno en Ansible
+  hosts: servidor_remoto
+  tasks:
+    - name: Configurar la contraseña de la base de datos
+      shell: |
+        # Utiliza la variable de entorno DB_PASSWORD
+        echo "Contraseña de la base de datos: $DB_PASSWORD"
+      register: resultado_comando
+
+    - name: Realizar alguna tarea con la contraseña
+      debug:
+        msg: "Realizando alguna tarea con la contraseña: {{ resultado_comando.stdout }}"
+
+        ---
+    - name: Ejemplo de uso de variable de entorno del sistema de control
+      hosts: servidor_remoto
+      tasks:
+        - name: Mostrar el valor de la variable de entorno del sistema de control
+          debug:
+            var: ansible_env.MI_VARIABLE_ENTORNO

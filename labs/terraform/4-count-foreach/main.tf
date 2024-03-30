@@ -3,6 +3,7 @@ resource "aws_instance" "myec2" {
   ami           = "ami-08a52ddb321b32a8c"
   instance_type = "t2.micro"
   key_name = "devops"
+  subnet_id = data.terraform_remote_state.vpc.outputs.subnet_id
 }
 
 resource "aws_iam_user" "user-count" {
@@ -16,5 +17,12 @@ resource "aws_iam_user" "user-foreach" {
     name = each.key
 }
 
+data "terraform_remote_state" "vpc" {
+  backend = "local"
+
+  config = {
+    path = "../laboratorio/terraform.tfstate"
+  }
+}
 
 

@@ -5,6 +5,7 @@ provider "aws" {
 
 #En este recurso, crearemos una VPC, una sección privada de la nube donde crearemos nuestros recursos
 resource "aws_vpc" "laboratorio" {
+#  for_each = 
   cidr_block = "10.0.0.0/16"
 }
 
@@ -29,7 +30,7 @@ resource "aws_route_table" "prod-public-crt" {
         //associated subnet can reach everywhere
         cidr_block = "0.0.0.0/0" 
         //CRT uses this IGW to reach internet
-        gateway_id = aws_internet_gateway.igw.id 
+        gateway_id = aws_internet_gateway.igw.id
     }
 }
 
@@ -75,10 +76,14 @@ output "instance_ip" {
   value       = aws_instance.instancia.public_ip
 }
 
+output "subnet_id" {
+  value = aws_subnet.subnet-1.id
+}
+
 #Ya lista nuestra red, configuramos nuestra instancia 
 resource "aws_instance" "instancia" {
   ami           = "ami-004dac467bb041dc7"
-  instance_type = "t3.micro"
+  instance_type = "t2.micro"
   key_name = "terraform_ec2_key"
   associate_public_ip_address = true
   subnet_id = aws_subnet.subnet-1.id

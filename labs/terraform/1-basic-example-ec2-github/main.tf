@@ -1,41 +1,27 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.16.1"
-    }
-    github = {
-      source = "integrations/github"
-      version = "5.35.0"
-    }
-  }
-  
-}
-
-provider "aws" {
-
-}
-
 resource "aws_instance" "myec2" {
   ami           = "ami-08a52ddb321b32a8c"
   instance_type = "t2.micro"
-  key_name      = "devops"
+  vpc_security_group_ids = [ aws_security_group.test-sg.id ]
 
   tags = {
     Name = "tf-example"
   }
 }
 
-provider "github" {
- 
+resource "aws_security_group" "test-sg" {
+  name = "my-test-sg"
+
+  ingress {
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
-
-resource "github_repository" "example" {
-  name               = "my-repo-example"
-  description        = "My awesome codebase"
-  visibility         = "private"
-  allow_merge_commit = true
-  allow_rebase_merge = true
-  allow_squash_merge = true
-}

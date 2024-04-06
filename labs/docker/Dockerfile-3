@@ -8,6 +8,8 @@ RUN apt-get install -y nginx
 
 # Copia el archivo index.html al directorio HTML de NGINX
 COPY index.html /var/www/html/
+EXPOSE 80
+ENV TEST="hola"
 
 # Ejecuta NGINX con el nuevo shell
 CMD ["nginx", "-g", "daemon off;"]

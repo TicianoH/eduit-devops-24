@@ -13,3 +13,5 @@ ENV TEST="hola"
 
 # Ejecuta NGINX con el nuevo shell
 CMD ["nginx", "-g", "daemon off;"]
+
+RUN apt-get install -y nginx

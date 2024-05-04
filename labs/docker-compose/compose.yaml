@@ -1,6 +1,14 @@
 services: 
  web:
-  image: nginx
+  # build: dockerfile
+  image: ubuntu:jammy
   container_name: nginx
+  command: bash -c "echo hola"
   ports:
-   - "8080:80"
+   - "8081:80"
+  volumes:
+   - ../docker/index.html:/var/www/html/index.html
+
+
+#  basedatos:
+#   image: mysql

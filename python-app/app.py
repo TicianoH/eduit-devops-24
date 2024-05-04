@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     """
-    Render the home template.
+    Render the home template. Con un cambio"
     
     This route renders a template named 'home.html' and passes the 'posts' list to it.
     """

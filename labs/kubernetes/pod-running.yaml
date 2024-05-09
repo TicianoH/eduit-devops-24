@@ -1,0 +1,120 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"myapp","environment":"dev","stack":"frontend"},"name":"myapp-pod","namespace":"default"},"spec":{"containers":[{"image":"nginx2","name":"nginx-container"}]}}
+  creationTimestamp: "2024-05-06T23:37:39Z"
+  labels:
+    app: myapp
+    environment: dev
+    stack: frontend
+  name: myapp-pod
+  namespace: default
+  resourceVersion: "1441"
+  uid: 2a435143-03d3-42fe-b339-c884e717c082
+spec:
+  containers:
+  - image: nginx2
+    imagePullPolicy: Always
+    name: nginx-container
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-78hmr
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-78hmr
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-06T23:42:51Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-06T23:37:39Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-06T23:48:18Z"
+    message: 'containers with unready status: [nginx-container]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-06T23:48:18Z"
+    message: 'containers with unready status: [nginx-container]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-06T23:37:39Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://28d531ba410b046b5061686b3ce1e63e9a058a78c844e57d2d994370eebdfc95
+    image: nginx:latest
+    imageID: docker-pullable://nginx@sha256:e62adf86b25223a3e42e2c845d48623d2dfed07a5e671994f503e5cf4ed450b4
+    lastState:
+      terminated:
+        containerID: docker://28d531ba410b046b5061686b3ce1e63e9a058a78c844e57d2d994370eebdfc95
+        exitCode: 0
+        finishedAt: "2024-05-06T23:48:15Z"
+        reason: Completed
+        startedAt: "2024-05-06T23:42:51Z"
+    name: nginx-container
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      waiting:
+        message: back-off 2m40s restarting failed container=nginx-container pod=myapp-pod_default(2a435143-03d3-42fe-b339-c884e717c082)
+        reason: CrashLoopBackOff
+  hostIP: 192.168.59.100
+  hostIPs:
+  - ip: 192.168.59.100
+  phase: Running
+  podIP: 10.244.0.3
+  podIPs:
+  - ip: 10.244.0.3
+  qosClass: BestEffort
+  startTime: "2024-05-06T23:37:39Z"

@@ -16,4 +16,4 @@ spec:
             name: nginx-svc
             port:
               number: 5000
-              
+

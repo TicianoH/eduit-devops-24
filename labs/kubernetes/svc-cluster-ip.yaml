@@ -1,20 +1,19 @@
 apiVersion: v1 
 kind: Pod
 metadata: 
-  name: myapp-pod
+  name: myapp-pod-2
   namespace: default
   labels:
-    app: myapp-2
+    app: myapp-3
 spec:
   containers:
   - name: nginx-container
     image: nginx
-
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: default
   labels:
     app: myapp
   name: nginx-svc
@@ -24,5 +23,6 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: myapp-2
+    app: myapp-3
   type: ClusterIP
+---

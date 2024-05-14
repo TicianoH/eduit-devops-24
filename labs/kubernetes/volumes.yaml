@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ELasticSearch
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: busybox
+    name: test-container
+    command: ['sh', '-c', 'echo "The app is running!" && tail -f /dev/null']
+    env:
+    - name: variable1
+      value: valor1
+    envFrom:
+    - configMapRef:
+        name: cm-test
+    - secretRef:
+        name: mysecret
+    volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+    - mountPath: /cm-test
+      name: config-vol
+
+  - image: nginx
+    name: nginx
+    volumeMounts:
+    - name: vol-2
+      mountPath: /tmp/vol2
+  volumes:
+  - name: secret-vol
+    secret:
+      name: mysecret
+  - name: cache-volume
+    emptyDir:
+      sizeLimit: 500Mi
+  - name: vol-2
+    emptyDir:
+  - name: config-vol
+    configMap:
+      name: cm-test
+      items:
+        - key: mult
+          path: mult
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: cm-test
+  namespace: default
+data:
+  key: value
+  var2: val2
+  mult: |
+    linea1
+    linea2
+    linea3
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+  namespace: default
+type: Opaque
+data:
+  password: S3ViZXJuZXRlc1JvY2tzIQ==
+  # Example:
+  # password: {{ .Values.password | b64enc }}

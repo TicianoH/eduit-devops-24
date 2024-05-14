@@ -18,11 +18,20 @@ pipeline {
         }
 
         stage("Docker push") {
-            steps{
+            steps {
                 sh 'docker push ${IMAGE_NAME}:${BUILD_NUMBER}'
             }
         }
+
+        stage("Deploy kubernetes") {
+            steps {
+                sh 'kubectl set image -f python-app/python-app.yaml python-app=python-app:${BUILD_NUMBER} --local -o yaml > python-app-deploy.yaml'
+                sh 'kubectl apply python-app-deploy.yaml'
+            }
+        }
     }
+
+
         post {
             success {
                 echo "Docker Push correcto!"

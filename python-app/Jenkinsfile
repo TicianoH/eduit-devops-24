@@ -4,7 +4,7 @@ pipeline {
         IMAGE_NAME = "trancosarg/python-app"
         DOCKERHUB_CREDS = credentials('dockerhub')
     }
-
+    triggers { pollSCM('H */6 * * 1-5') }
     stages {
         stage('Build image') {
             steps {

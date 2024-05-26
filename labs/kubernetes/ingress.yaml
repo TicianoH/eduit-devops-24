@@ -13,7 +13,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx-svc
+            name: my-web-app
             port:
-              number: 5000
+              name: http
 

@@ -10,10 +10,10 @@ selectorLabels:
 replicaCount: 2
 
 image:
-  repository: asruiz1235/python-app
+  repository: trancosarg/python-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "5"
+  tag: "0.1"
 
 imagePullSecrets:
   - name: my-registry-key

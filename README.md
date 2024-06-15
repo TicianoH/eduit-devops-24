@@ -12,8 +12,7 @@ Este proyecto es parte del curso de DevOps Cloud y tiene como objetivo proporcio
 
 ## Estructura del Repositorio
 
-- `python-app/`: Contiene el código fuente de la aplicación.
-- `kubernetes/`: Manifest de ejemplo de K8s.
+- `python-app/`: Contiene el código fuente de la aplicación, Jenkins pipeline y Helm+Kubernetes manifests.
 - `labs/`: Ejemplos de código de todos los temas vistos.
 
 ## Requisitos Previos
